@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Me Too founder Tarana Burke</title>
+    <meta name="description" content="Although interest in Burke has grown, coverage of Milano's viral #MeToo tweet makes her more popular overall">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </head>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; /*INPUT: set the width of the chart*/
+    margin: 0 auto;
+}
+
+#container{
+    height: 300px; /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 5px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 5px;}
+    #text {font-size: 12px;line-height: 14px;}
+} 
+
+</style>
+
+<body>
+<div id="wrapper">  
+    <div class="head">
+        <!-- INPUT: title -->
+        <div class="headline">Tarana Burke, founder of the Me Too movement, has had less global media attention than Alyssa Milano</div>
+        <!-- INPUT: description for the chart -->
+        <div id="text">Although interest in Burke has grown, coverage of Milano's viral #MeToo tweet makes her more popular overall. Burke has been covered about 80% as often as Milano.</div> 
+    </div>  
+    <div id="container"></div>
+    <div class="note">
+        <!-- INPUT: data source -->
+        Source: <a href="https://mediacloud.org/" target="_blank">Media Cloud</a> data as of Jan. 16, using the <a href="https://sources.mediacloud.org/#/collections/9272347" target="_blank">"ABYZ Global English Sources"</a> collection, which contains around 1,500 sources publications listed in the ABYZ directory. 
+        <!-- INPUT: additional notes for the chart --> 
+        <!-- INPUT: credit -->
+        <div id="credit">Sophie Chou / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'line',
+            },
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+
+            //the unit of xAxis is time-based. If your xAxis unit is not time or date, use the line-category template.
+            xAxis: {
+                type: 'datetime',
+            //how the time/date unit should be displayed on xAxis, check Highcharts API for other options (http://api.highcharts.com/highcharts/xAxis.dateTimeLabelFormats)    
+                dateTimeLabelFormats: {
+                    year: '%Y',
+                    month: '%b',
+                },
+            //set the interval between units displayed on xAxis (the current setting is for 5 years), remove this line if you want Highcharts to decide for you.        
+                //tickInterval: 24 * 3600 * 1000 * 365 * 5,
+                showLastLabel: true,          
+            },
+            yAxis: {
+            //INPUT: the unit of yAxis    
+                title: {
+                  text: 'Sentences per day',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            //Disable the legend if there's only one series of data
+            legend: {
+                enabled: false,
+            },
+            //Customize the default tooltip. Refer to the syntax at Highcharts API (http://api.highcharts.com/highcharts/tooltip.headerFormat, http://api.highcharts.com/highcharts/tooltip.pointFormat). You can also write a function to populate the tooltip by using the "formatter" function.
+            tooltip: {
+                xDateFormat: '%b. %d, %Y',
+            },
+            plotOptions: {
+                series: {
+                    //MODIFY: Show/hide label on the data points. Default is hide.
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '11px',
+                            color: '#2e2e2e',
+                        },
+                        //MODIFY: Customize the data label. "point.y" is the data value. ",.0f" sets "," as thousand separator and sets the decimal point at zero. Refer to the syntax at Highcharts API under the topic "FORMAT STRINGS" (http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting). Remove this line for Highcharts to auto-populate the label.
+                        format: '{point.text}',
+                    },
+                },
+                //MODIFY: Show/hide the data point marker.
+                line: {
+                    marker: {
+                        enabled: false
+                    }
+                },
+            },    
+            //INPUT: Your data points should be in an array. Color applies to all data points. 'Name' refers to the series name which will appear in the default tooltip. If you want to change the color of a particular data point, replace that data value with an object like '{y:1185, color:"#FF7F00"}', or see the chart "iraq-married-401".
+            series: [ 
+                // {name: "\"Alyssa Milano\"", color:"#4188BC", 
+                // data :[
+                //         {x:Date.UTC(2017,09,15), y:140, text: "Oct. 15, 2017: <br> Milano tweets <br> about #MeToo"},
+                //         [Date.UTC(2017,09,18),68],
+                //         [Date.UTC(2017,09,21),11],
+                //         [Date.UTC(2017,09,24),10],
+                //         [Date.UTC(2017,09,27),5],
+                //         [Date.UTC(2017,09,30),12],
+                //         [Date.UTC(2017,10,02),1],
+                //         [Date.UTC(2017,10,05),1],
+                //         [Date.UTC(2017,10,08),4],
+                //         [Date.UTC(2017,10,11),9],
+                //         [Date.UTC(2017,10,14),3],
+                //         [Date.UTC(2017,10,17),3],
+                //         [Date.UTC(2017,10,20),4],
+                //         [Date.UTC(2017,10,23),1],
+                //         [Date.UTC(2017,10,26),1],
+                //         [Date.UTC(2017,10,29),5],
+                //         [Date.UTC(2017,11,02),1],
+                //         {x:Date.UTC(2017,11,05), y:50, text:"Dec. 6, 2017:<br>TIME announces <br> person of the year"},
+                //         [Date.UTC(2017,11,08),9],
+                //         [Date.UTC(2017,11,11),7],
+                //         [Date.UTC(2017,11,14),9],
+                //         [Date.UTC(2017,11,17),16],
+                //         [Date.UTC(2017,11,20),3],
+                //         [Date.UTC(2017,11,23),0],
+                //         [Date.UTC(2017,11,26),9],
+                //         [Date.UTC(2017,11,29),12],
+                //         [Date.UTC(2018,00,01),5],
+                //         [Date.UTC(2018,00,04),5],
+                //         [Date.UTC(2018,00,07),3],
+                //         [Date.UTC(2018,00,10),4],
+                //         [Date.UTC(2018,00,13),1],
+                //         [Date.UTC(2018,00,16),12],
+
+                // ]},
+                // {name: "\"Tarana Burke\"", color:"#FF7F00", 
+                // data :[
+                //     [Date.UTC(2017,09,15),20],
+                //     [Date.UTC(2017,09,18),26],
+                //     [Date.UTC(2017,09,21),6],
+                //     [Date.UTC(2017,09,24),6],
+                //     [Date.UTC(2017,09,27),14],
+                //     [Date.UTC(2017,09,30),6],
+                //     [Date.UTC(2017,10,02),1],
+                //     [Date.UTC(2017,10,05),2],
+                //     [Date.UTC(2017,10,08),6],
+                //     [Date.UTC(2017,10,11),12],
+                //     [Date.UTC(2017,10,14),0],
+                //     [Date.UTC(2017,10,17),5],
+                //     [Date.UTC(2017,10,20),2],
+                //     [Date.UTC(2017,10,23),1],
+                //     [Date.UTC(2017,10,26),0],
+                //     [Date.UTC(2017,10,29),3],
+                //     [Date.UTC(2017,11,02),4],
+                //     [Date.UTC(2017,11,05),65],
+                //     [Date.UTC(2017,11,08),10],
+                //     [Date.UTC(2017,11,11),4],
+                //     [Date.UTC(2017,11,14),8],
+                //     [Date.UTC(2017,11,17),12],
+                //     [Date.UTC(2017,11,20),6],
+                //     [Date.UTC(2017,11,23),2],
+                //     [Date.UTC(2017,11,26),7],
+                //     [Date.UTC(2017,11,29),22],
+                //     [Date.UTC(2018,00,01),7],
+                //     [Date.UTC(2018,00,04),2],
+                //     {x:Date.UTC(2018,00,07), y:99, text:"Jan. 07, 2018:<br> Golden Globe<br> awards"},
+                //     [Date.UTC(2018,00,10),25],
+                //     [Date.UTC(2018,00,13),9],
+                //     [Date.UTC(2018,00,16),7],
+                // ]},
+                {name: "\"Tarana Burke\"", color:"#FF7F00", 
+                    data :[
+                    [Date.UTC(2017,09,15),30],
+                    [Date.UTC(2017,09,18),42],
+                    [Date.UTC(2017,09,21),14],
+                    [Date.UTC(2017,09,24),13],
+                    [Date.UTC(2017,09,27),37],
+                    [Date.UTC(2017,09,30),16],
+                    [Date.UTC(2017,10,02),6],
+                    [Date.UTC(2017,10,05),6],
+                    [Date.UTC(2017,10,08),8],
+                    [Date.UTC(2017,10,11),19],
+                    [Date.UTC(2017,10,14),3],
+                    [Date.UTC(2017,10,17),13],
+                    [Date.UTC(2017,10,20),9],
+                    [Date.UTC(2017,10,23),3],
+                    [Date.UTC(2017,10,26),2],
+                    [Date.UTC(2017,10,29),10],
+                    [Date.UTC(2017,11,02),10],
+                    {x:Date.UTC(2017,11,05),y:115, text:"Dec. 6, 2017:<br>Time announces <br> person of the year"},
+                    [Date.UTC(2017,11,08),25],
+                    [Date.UTC(2017,11,11),9],
+                    [Date.UTC(2017,11,14),18],
+                    [Date.UTC(2017,11,17),25],
+                    [Date.UTC(2017,11,20),13],
+                    [Date.UTC(2017,11,23),5],
+                    [Date.UTC(2017,11,26),19],
+                    [Date.UTC(2017,11,29),43],
+                    [Date.UTC(2018,00,01),24],
+                    [Date.UTC(2018,00,04),5],
+                    {x:Date.UTC(2018,00,07), y:248, text:"Jan. 07, 2018:<br> Golden Globe<br> Awards"},
+                    [Date.UTC(2018,00,10),48],
+                    [Date.UTC(2018,00,13),17],
+                    [Date.UTC(2018,00,16),11],
+
+                ]},
+                {name: "\"Alyssa Milano\"", color:"#4188BC", 
+                    data :[
+                    {x:Date.UTC(2017,09,15),y:339, text: "Oct. 15, 2017: <br> Milano tweets <br> about #MeToo"},
+                    [Date.UTC(2017,09,18),168],
+                    [Date.UTC(2017,09,21),48],
+                    [Date.UTC(2017,09,24),24],
+                    [Date.UTC(2017,09,27),26],
+                    [Date.UTC(2017,09,30),28],
+                    [Date.UTC(2017,10,02),7],
+                    [Date.UTC(2017,10,05),2],
+                    [Date.UTC(2017,10,08),11],
+                    [Date.UTC(2017,10,11),25],
+                    [Date.UTC(2017,10,14),9],
+                    [Date.UTC(2017,10,17),11],
+                    [Date.UTC(2017,10,20),10],
+                    [Date.UTC(2017,10,23),8],
+                    [Date.UTC(2017,10,26),5],
+                    [Date.UTC(2017,10,29),8],
+                    [Date.UTC(2017,11,02),3],
+                    [Date.UTC(2017,11,05),83],
+                    [Date.UTC(2017,11,08),33],
+                    [Date.UTC(2017,11,11),13],
+                    [Date.UTC(2017,11,14),25],
+                    [Date.UTC(2017,11,17),34],
+                    [Date.UTC(2017,11,20),4],
+                    [Date.UTC(2017,11,23),4],
+                    [Date.UTC(2017,11,26),19],
+                    [Date.UTC(2017,11,29),23],
+                    [Date.UTC(2018,00,01),20],
+                    [Date.UTC(2018,00,04),10],
+                    [Date.UTC(2018,00,07),22],
+                    [Date.UTC(2018,00,10),12],
+                    [Date.UTC(2018,00,13),7],
+                    [Date.UTC(2018,00,16),25], 
+                ]},
+            ],
+
+        });
+    });
+
+});
+</script>

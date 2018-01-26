@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+   <title>Hollywood celebrites are mentioned in US articles about #MeToo much more frequently than activists</title>
+    <meta name="description" content="Of the eight actresses that brought activists as dates to the Golden Globes, all but one was written about far more frequently in US news stories than their dates. Tarana Burke is the original founder of the Me Too movement.">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </head>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 450px; /*INPUT: set the width of the chart*/
+    margin: 0 auto;
+}
+
+#container{
+    height: 300px; /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 5px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 5px;}
+    #text {font-size: 12px;line-height: 14px;}
+} 
+
+</style>
+
+<body>
+<div id="wrapper">    
+    <div class="head">
+        <!-- INPUT: title -->
+        <div class="headline"> Celebrites received far more media attention in the US than the activists they brought to the Golden Globes</div>
+        <!-- INPUT: description for the chart -->
+        <div id="text">Of the eight actresses that brought activists as dates to the Golden Globes, all but one was written about far more frequently in news stories than their dates. Tarana Burke is the original founder of the Me Too movement.</div> 
+    </div>     
+    <div id="top-countries-chart"></div>
+    <div class="note">
+        <!-- INPUT: data source -->
+        Source: <a href="https://mediacloud.org/" target="">Media Cloud</a> data, using the “U.S. Top Online News” collection, which includes the top 50 online news sources according to Pew Research Center and Comscore in 2015. 
+        <!-- INPUT: additional notes for the chart --> 
+        <!-- INPUT: credit -->
+        <div id="credit">Sophie Chou / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+
+    Highcharts.setOptions({
+        lang: {
+          thousandsSep: ','
+        }
+    }),
+    
+ // Build top countries chart
+    $('#top-countries-chart').highcharts({ 
+            chart: {
+                // renderTo: 'top-countries-chart',
+                type: 'bar',
+            },
+            title: {
+                text: "",
+            },
+            subtitle: {
+                enabled: false,
+            },
+            //INPUT: Categories displayed on xAxis
+            xAxis: {
+                categories: ["Michelle Williams","Tarana Burke","Emma Watson","Marai Larasi","Susan Sarandon","Rosa Clemente","Meryl Streep","Ai-jen poo","Laura Dern","Mónica Ramírez","Shailene Woodley","Calina Lawrence","Amy Poehler","Saru Jayaraman","Emma Stone","Billie Jean King"],   
+            },
+
+            //INPUT: the unit of yAxis    
+            yAxis: {
+                title: {
+                  text: "Articles that contain person's name <br> and terms related to #MeToo",
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+
+                //MODIFY: set the minimum interval between unit of yAxis. Remove this line for Highcharts to decide based on width.    
+                minTickInterval:50000,
+            },
+            credits: {enabled: false},
+
+            //Disable the legend if there's only one series of data
+            legend: {enabled: false},
+
+            //Customize the default tooltip. Refer to the syntax at Highcharts API (http://api.highcharts.com/highcharts/tooltip.headerFormat, http://api.highcharts.com/highcharts/tooltip.pointFormat). You can also write a function to populate the tooltip by using the "formatter" function, see the chart "iraq-laws-608".
+            tooltip: {
+                enabled: false,
+                //headerFormat: '',
+                pointFormat: '{point.series.name}: <b>{point.y}',
+            },
+            plotOptions: {
+                series:{
+                    //MODIFY: adjust the space between bars
+                    groupPadding: 0.1,
+                    //pointPadding: 0.1,
+                    stickyTracking: false,
+                    
+                    //MODIFY: Show/hide label on the data points. Default is hide.
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '11px',
+                        },
+                        //MODIFY: Customize the data label. "point.y" is the data value. ",.1f" sets "," as thousand separator and sets the decimal point at zero. Refer to the syntax at Highcharts API under the topic "FORMAT STRINGS" (http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting). Remove this line for Highcharts to auto-populate the label.
+                        // format: '{point.y:,.0f}',
+                    }
+                },
+            },    
+             //INPUT: Your data points should be in an array. Color applies to all data points. 'Name' refers to the series name which will appear in the default tooltip. If you want to change the color of a particular data point, replace that data value with an object such as '{y:17.7, color:"#FF7F00"}'.
+            series: [ 
+                {name:"Articles", color:"#4188bc", data: [{y: 86, color:"#4188BC"},{y:358,color:"#4DAF4A"},{y:18, color:"#4188BC"}, {y:13, color:"#4DAF4A"}, {y:10, color:"#4188BC"}, {y:2, color: "#4DAF4A"},{y:169,color:"#4188BC"}, {y:28, color: "#4DAF4A"}, {y:32,color:"#4188BC"},{y:12,color:"#4188BC"},{y:6,color: "#4DAF4A"}, {y:2,color:"#4188BC"}, {y:9,color: "#4DAF4A"}, {y:6,color:"#4188BC"}, {y:33, color: "#4DAF4A"}, {y:4, color:"#4188BC"}]},
+            ],
+            });
+</script>
+
+
+
+
+
+
+
+
+
+

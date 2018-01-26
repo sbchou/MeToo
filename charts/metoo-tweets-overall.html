@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Three months after #MeToo went viral, interest on Twitter continues</title>
+    <meta name="description" content="Three months after #MeToo went viral, interest on Twitter continues">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+  </head>
+
+<style>
+body {
+  font-family: "Source Sans Pro","Helvetica Neue",Helvetica,Arial,"Nimbus Sans L",sans-serif;
+  font-size: 112.5%;
+  line-height: 1.5em;
+  color: #33333c;
+      }  
+
+#wrapper {
+    border:1px solid #D3D3D3;
+    max-width: 600px; /*INPUT: set the width of the chart*/
+    margin: 0 auto;
+}
+
+#container{
+    height: 300px; /*INPUT: set the height of the chart*/
+    max-width: 100%;
+}
+
+.head {padding:0px 10px;}
+
+.note {
+    font-size: 12px;
+    color: #808080;
+    line-height: 14px;
+    padding:0px 10px 10px 10px;
+}
+
+#credit {
+    font-size: 10px;
+    padding-top: 5px;
+    text-align: right;
+}
+
+.headline {
+    font-size: 18px;
+    font-weight: normal;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    line-height: 24px;
+}
+
+#text {
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 18px;
+}
+
+@media (max-width: 400px ) { 
+    .headline {font-size: 16px; line-height: 20px; padding-bottom: 5px;}
+    #text {font-size: 12px;line-height: 14px;}
+} 
+
+</style>
+
+<body>
+<div id="wrapper">  
+    <div class="head">
+        <!-- INPUT: title -->
+        <div class="headline">Three months after #MeToo went viral, interest on Twitter continues</div>
+        <!-- INPUT: description for the chart --> 
+    </div>  
+    <div id="container"></div>
+    <div class="note">
+        <!-- INPUT: data source -->
+        Source: <a target="_blank" href="https://www.crimsonhexagon.com/" target="">Crimson Hexagaon</a>. Latest data Jan. 19, 2018.
+        <!-- INPUT: credit -->
+        <div id="credit">Sophie Chou / PRI</div>
+    </div>
+</div>
+</body>
+
+<script>
+$(function () {
+    var chart;
+    $(document).ready(function() {
+
+        Highcharts.setOptions({
+            lang: {
+              thousandsSep: ','
+            }
+        }),
+
+        chart = new Highcharts.Chart({
+            chart: {
+                renderTo: 'container',
+                type: 'line',
+            },
+            title: {
+                text: null,
+            },
+            subtitle: {
+                enabled: false,
+            },
+
+            //the unit of xAxis is time-based. If your xAxis unit is not time or date, use the line-category template.
+            xAxis: {
+                type: 'datetime',
+            //how the time/date unit should be displayed on xAxis, check Highcharts API for other options (http://api.highcharts.com/highcharts/xAxis.dateTimeLabelFormats)    
+                dateTimeLabelFormats: {
+                    year: '%Y',
+                    month: '%b',
+                },
+            //set the interval between units displayed on xAxis (the current setting is for 5 years), remove this line if you want Highcharts to decide for you.        
+                //tickInterval: 24 * 3600 * 1000 * 365 * 5,
+                showLastLabel: true,          
+            },
+            yAxis: {
+            //INPUT: the unit of yAxis    
+                title: {
+                  text: 'Tweets with hashtag #MeToo',
+                  style: {
+                    color: '#808080',
+                    fontSize: '11px',
+                  },  
+                },
+                endOnTick: false,
+            },
+            credits: {enabled: false},
+            //Disable the legend if there's only one series of data
+            legend: {
+                enabled: false,
+            },
+            //Customize the default tooltip. Refer to the syntax at Highcharts API (http://api.highcharts.com/highcharts/tooltip.headerFormat, http://api.highcharts.com/highcharts/tooltip.pointFormat). You can also write a function to populate the tooltip by using the "formatter" function.
+            tooltip: {
+                xDateFormat: '%b. %d, %Y',
+            },
+            plotOptions: {
+                series: {
+                    //MODIFY: Show/hide label on the data points. Default is hide.
+                    dataLabels: {
+                        enabled: true,
+                        style: {
+                            fontSize: '11px',
+                            color: '#2e2e2e',
+                        },
+                        //MODIFY: Customize the data label. "point.y" is the data value. ",.0f" sets "," as thousand separator and sets the decimal point at zero. Refer to the syntax at Highcharts API under the topic "FORMAT STRINGS" (http://www.highcharts.com/docs/chart-concepts/labels-and-string-formatting). Remove this line for Highcharts to auto-populate the label.
+                        format: '{point.text}',
+                    },
+                },
+                //MODIFY: Show/hide the data point marker.
+                line: {
+                    marker: {
+                        enabled: false
+                    }
+                },
+            },    
+            //INPUT: Your data points should be in an array. Color applies to all data points. 'Name' refers to the series name which will appear in the default tooltip. If you want to change the color of a particular data point, replace that data value with an object like '{y:1185, color:"#FF7F00"}', or see the chart "iraq-married-401".
+            series: [ 
+                {name: "tweets", color:"#4188BC", 
+                data :[
+                    [Date.UTC(2017,9,15),179136],
+                    {x:Date.UTC(2017,9,16), y:745448, text: "Oct. 15, 2017: <br> Milano tweets <br> about #MeToo"},
+                    [Date.UTC(2017,9,17),421341],
+                    [Date.UTC(2017,9,18),247573],
+                    [Date.UTC(2017,9,19),161756],
+                    [Date.UTC(2017,9,20),89190],
+                    [Date.UTC(2017,9,21),58617],
+                    [Date.UTC(2017,9,22),63046],
+                    [Date.UTC(2017,9,23),48134],
+                    [Date.UTC(2017,9,24),47489],
+                    [Date.UTC(2017,9,25),52686],
+                    [Date.UTC(2017,9,26),48928],
+                    [Date.UTC(2017,9,27),32011],
+                    [Date.UTC(2017,9,28),28616],
+                    [Date.UTC(2017,9,29),35866],
+                    [Date.UTC(2017,9,30),39690],
+                    [Date.UTC(2017,9,31),26817],
+                    [Date.UTC(2017,10,1),24772],
+                    [Date.UTC(2017,10,2),24747],
+                    [Date.UTC(2017,10,3),21701],
+                    [Date.UTC(2017,10,4),18342],
+                    [Date.UTC(2017,10,5),20661],
+                    [Date.UTC(2017,10,6),17973],
+                    [Date.UTC(2017,10,7),18204],
+                    [Date.UTC(2017,10,8),23911],
+                    [Date.UTC(2017,10,9),38374],
+                    [Date.UTC(2017,10,10),47902],
+                    [Date.UTC(2017,10,11),33303],
+                    [Date.UTC(2017,10,12),38579],
+                    [Date.UTC(2017,10,13),49200],
+                    [Date.UTC(2017,10,14),35999],
+                    [Date.UTC(2017,10,15),27420],
+                    [Date.UTC(2017,10,16),71826],
+                    [Date.UTC(2017,10,17),53734],
+                    [Date.UTC(2017,10,18),37310],
+                    [Date.UTC(2017,10,19),31623],
+                    [Date.UTC(2017,10,20),36481],
+                    [Date.UTC(2017,10,21),45811],
+                    [Date.UTC(2017,10,22),45528],
+                    [Date.UTC(2017,10,23),28121],
+                    [Date.UTC(2017,10,24),34264],
+                    [Date.UTC(2017,10,25),37499],
+                    [Date.UTC(2017,10,26),30935],
+                    [Date.UTC(2017,10,27),36205],
+                    [Date.UTC(2017,10,28),31658],
+                    [Date.UTC(2017,10,29),44659],
+                    [Date.UTC(2017,10,30),50654],
+                    [Date.UTC(2017,11,1),32554],
+                    [Date.UTC(2017,11,2),19869],
+                    [Date.UTC(2017,11,3),27394],
+                    [Date.UTC(2017,11,4),34230],
+                    [Date.UTC(2017,11,5),33062],
+                    {x:Date.UTC(2017,11,6), y:272132, text:"Dec. 6, 2017:<br>Time announces <br> person of the year"},
+                    [Date.UTC(2017,11,7),150649],
+                    [Date.UTC(2017,11,8),75656],
+                    [Date.UTC(2017,11,9),55921],
+                    [Date.UTC(2017,11,10),42529],
+                    [Date.UTC(2017,11,11),94619],
+                    [Date.UTC(2017,11,12),100862],
+                    [Date.UTC(2017,11,13),74987],
+                    [Date.UTC(2017,11,14),58553],
+                    [Date.UTC(2017,11,15),47856],
+                    [Date.UTC(2017,11,16),62791],
+                    [Date.UTC(2017,11,17),108352],
+                    [Date.UTC(2017,11,18),72800],
+                    [Date.UTC(2017,11,19),66876],
+                    [Date.UTC(2017,11,20),64067],
+                    [Date.UTC(2017,11,21),43461],
+                    [Date.UTC(2017,11,22),50359],
+                    [Date.UTC(2017,11,23),40719],
+                    [Date.UTC(2017,11,24),41718],
+                    [Date.UTC(2017,11,25),31412],
+                    [Date.UTC(2017,11,26),24517],
+                    [Date.UTC(2017,11,27),28903],
+                    [Date.UTC(2017,11,28),25237],
+                    [Date.UTC(2017,11,29),26769],
+                    [Date.UTC(2017,11,30),22065],
+                    [Date.UTC(2017,11,31),22193],
+                    [Date.UTC(2018,0,1),38798],
+                    [Date.UTC(2018,0,2),39143],
+                    [Date.UTC(2018,0,3),30788],
+                    [Date.UTC(2018,0,4),26729],
+                    [Date.UTC(2018,0,5),30019],
+                    [Date.UTC(2018,0,6),25188],
+                    {x: Date.UTC(2018,0,7), y:125759, text:"Jan. 07, 2018:<br> Golden Globe<br> Awards"},
+                    [Date.UTC(2018,0,8),170010],
+                    [Date.UTC(2018,0,9),98187],
+                    [Date.UTC(2018,0,10),90444],
+                    [Date.UTC(2018,0,11),63229],
+                    [Date.UTC(2018,0,12),58693],
+                    [Date.UTC(2018,0,13),55963],
+                    [Date.UTC(2018,0,14),69289],
+                    [Date.UTC(2018,0,15),79233],
+                    [Date.UTC(2018,0,16),81176],
+                    [Date.UTC(2018,0,17),61653],
+                    [Date.UTC(2018,0,18),66284 ],
+                ]},
+                 
+            ],
+
+        });
+    });
+
+});
+</script>
